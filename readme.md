@@ -1,6 +1,8 @@
 # TikTok Comment Gatherer
 Written and maintained by [@Olliemyers4](https://github.com/Olliemyers4)
 
+Kanban board : [Issue Tracker](https://github.com/users/Olliemyers4/projects/6/views/1)
+
 Tested Python Version - Python 3.11.6
 
 Scripts are designed for usage in Windows
