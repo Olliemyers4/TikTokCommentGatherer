@@ -1,2 +1,2 @@
 @echo off
-python tag.py
+python tiktokComments.py
