@@ -22,6 +22,7 @@ options.add_argument("--disable-blink-features")
 options.add_argument('--disable-blink-features=AutomationControlled')
 options.add_experimental_option('useAutomationExtension', False)
 options.add_argument("--lang=en-GB,en-US,en")
+options.add_argument("--log-level=3")
 driver = webdriver.Chrome(options=options)
 
 driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
@@ -34,7 +35,7 @@ stealth(driver,
         fix_hairline=True,
         )
 
-print(driver.execute_script("return navigator.userAgent;"))
+#print(driver.execute_script("return navigator.userAgent;"))
 
 #get videos from file
 videos = []
@@ -48,7 +49,7 @@ try:
         EC.presence_of_element_located((By.XPATH, '//div[contains(@class,"css-wjuodt-DivVideoFeedV2 ecyq5ls0")]'))
     )
     toc = time.perf_counter()
-    print(f"Page Loaded in {toc-tic:0.4f} seconds")
+    #print(f"Page Loaded in {toc-tic:0.4f} seconds")
 except:
     print("Page Failed")
     driver.get_screenshot_as_file(os.curdir + "\\failed1.png")
