@@ -111,15 +111,20 @@ with open("comments.txt","wb") as f:
         #    f.write(driver.page_source.encode('utf-8'))
 
         children = driver.find_elements(By.XPATH,'.//div[contains(@class,"DivCommentItemContainer")]')
+        while len(children) < 100:
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            time.sleep(1)
+            children = driver.find_elements(By.XPATH,'.//div[contains(@class,"DivCommentItemContainer")]')
         f.write(("\n").encode('utf-8'))
         f.write(("Video: " + video + "\n").encode('utf-8'))
         f.write(("Comments:\n").encode('utf-8'))
-
+    
+        #print(f"Video: {video} - Comments: {len(children)}")
         for i in range(len(children)):
             child = children[i]
 
-            f.write(((str(child.find_element(By.XPATH,'.//a[contains(@data-e2e,"comment-avatar-1")]').get_attribute('outerHTML')).split('href="/@')[1].split('"')[0]) + ":\n").encode('utf-8')) # This is the username
-            #f.write((child.find_elements(By.XPATH,'.//span[contains(@class,"SpanUserNameText")]')[0].text + ":\n").encode('utf-8')) # This is the display name
-            #f.write((child.find_elements(By.XPATH,'.//p[contains(@class,"PCommentText")]')[0].text + "\n").encode('utf-8'))
-            f.write(((str(child.find_element(By.XPATH,'.//p[contains(@data-e2e,"comment-level-1")]').get_attribute('innerHTML'))).split('<span dir="">')[1].split('</span')[0] + "\n").encode('utf-8')) # This is the comment (More reliable)
+            #f.write(((str(child.find_element(By.XPATH,'.//a[contains(@data-e2e,"comment-avatar-1")]').get_attribute('outerHTML')).split('href="/@')[1].split('"')[0]) + ":\n").encode('utf-8')) # This is the username
+            f.write((child.find_elements(By.XPATH,'.//span[contains(@class,"SpanUserNameText")]')[0].text + ":\n").encode('utf-8')) # This is the display name
+            f.write((child.find_elements(By.XPATH,'.//p[contains(@class,"PCommentText")]')[0].text + "\n").encode('utf-8'))
+            #f.write(((str(child.find_element(By.XPATH,'.//p[contains(@data-e2e,"comment-level-1")]').get_attribute('innerHTML'))).split('<span dir="">')[1].split('</span')[0] + "\n").encode('utf-8')) # This is the comment (More reliable)
             f.write(("--------------------\n").encode('utf-8'))
