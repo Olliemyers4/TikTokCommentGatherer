@@ -60,7 +60,7 @@ driver.get(f"https://www.tiktok.com/tag/{tag}")
 
 try:
     element = WebDriverWait(driver, 120).until(
-        EC.presence_of_element_located((By.XPATH, '//div[contains(@class,"css-wjuodt-DivVideoFeedV2 ecyq5ls0")]'))
+        EC.presence_of_element_located((By.XPATH, '//div[contains(@class,"css-hz5yk3-DivVideoFeedV2 ecyq5ls0")]'))
     )
 except:
     # If the page fails to load, take a screenshot and close the program
@@ -111,10 +111,15 @@ with open("comments.txt","wb") as f:
         #    f.write(driver.page_source.encode('utf-8'))
 
         children = driver.find_elements(By.XPATH,'.//div[contains(@class,"DivCommentItemContainer")]')
+        stuck = 0
         while len(children) < 100:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(1)
             children = driver.find_elements(By.XPATH,'.//div[contains(@class,"DivCommentItemContainer")]')
+            if (len(children) == stuck):
+                break
+            else:
+                stuck = len(children)
         f.write(("\n").encode('utf-8'))
         f.write(("Video: " + video + "\n").encode('utf-8'))
         f.write(("Comments:\n").encode('utf-8'))
