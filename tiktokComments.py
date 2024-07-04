@@ -60,7 +60,7 @@ driver.get(f"https://www.tiktok.com/tag/{tag}")
 
 try:
     element = WebDriverWait(driver, 120).until(
-        EC.presence_of_element_located((By.XPATH, '//div[contains(@class,"css-hz5yk3-DivVideoFeedV2 ecyq5ls0")]'))
+        EC.presence_of_element_located((By.XPATH, '//div[contains(@class,"DivVideoFeedV2")]'))
     )
 except:
     # If the page fails to load, take a screenshot and close the program
